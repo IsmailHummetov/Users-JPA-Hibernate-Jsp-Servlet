@@ -18,7 +18,7 @@
     User u = (User) request.getAttribute("user");
 %>
 
-<div style="margin: 60px">
+<div style="margin: 50px">
     <table class="table">
         <thead>
         <tr>
