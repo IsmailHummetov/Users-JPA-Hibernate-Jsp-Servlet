@@ -1,4 +1,8 @@
-<%@ page import="ResumeJpaDb.Entity.User" %><%--
+<%@ page import="ResumeJpaDb.Dao.Inter.UserDaoInter" %>
+<%@ page import="ResumeJpaDb.Entity.User" %>
+<%@ page import="ResumeJpaDb.Entity.UserSkill" %>
+<%@ page import="ResumeJpaDb.Main.Context" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 05-Jun-24
@@ -35,7 +39,6 @@
         </thead>
         <tbody>
         <tr>
-            </th>
             <td><%=u.getFirstname() == null ? "N/A" : u.getFirstname()%>
             </td>
             <td><%=u.getLastname() == null ? "N/A" : u.getLastname()%>
@@ -57,7 +60,34 @@
         </tr>
         </tbody>
     </table>
-
+</div>
+<div style="margin: 50px">
+    <table class="table col-3">
+        <thead>
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">Skill</th>
+            <th scope="col">Power</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% UserDaoInter userDaoInter = Context.instanceUserDao();
+            List<UserSkill> userSkillList = userDaoInter.getAllSkillById(u.getId());
+            int i=0;
+            for (UserSkill userSkill:userSkillList){
+                i++;
+        %>
+        <tr>
+            <th><%=i%>
+            </th>
+            <td><%=userSkill.getSkill().getName()%>
+            </td>
+            <td><%=userSkill.getPower()%>
+            </td>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
